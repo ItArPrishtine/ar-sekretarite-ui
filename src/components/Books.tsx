@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
+import { Book } from './../shared/interfaces';
+
 import './style.scss';
 
 function Books() {
-    const [bookList, setBookList] = useState<any[]>([]);
+    const [bookList, setBookList] = useState<Book[]>([]);
 
     async function getData() {
         axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&&_sort=id:ASC`)
@@ -84,7 +86,7 @@ function Books() {
                 {
                     (bookList || []).map((element) => {
                         return (
-                            <div key={element} className="book-card" data-category="fiction" data-title="1984" data-author="george_orwell">
+                            <div key={element.id} className="book-card" data-category="fiction" data-title="1984" data-author="george_orwell">
                                 {/*<img src="https://fastly.picsum.photos/id/59/800/600.jpg?hmac=L2eXAA8MFqqxnkN4w-YFltHcmSo-gqwKHlKBNwxq490" alt="Book 1" />*/}
 
                                 <div className={'image'} style={{
