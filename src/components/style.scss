@@ -82,11 +82,12 @@
   justify-content: space-between;
 
   button {
-    width: 100%;
-    margin: 0 10px;
+    width: 60px;
+    text-align: center;
 
     &:last-of-type {
       color: white;
+      margin-left: 10px;
     }
   }
 }
@@ -95,4 +96,34 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .filter-bar  {
+    padding: 10px 0;
+
+    .buttons {
+      button:last-of-type {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .book-card {
+    width: 256px;
+
+    .image {
+      height: 213px;
+    }
+  }
+
+  .content-loader:last-of-type {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .content-loader:nth-last-of-type(2) {
+    display: none;
+  }
 }

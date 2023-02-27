@@ -134,7 +134,7 @@ function Books(props: any) {
             <div className="filter-bar row">
                 <div className='col-md-4'>
                         <label>Titulli i Librit:</label>
-                        <input onBlur={(event) => titleChange(event)} className="form-control" id="category" />
+                        <input placeholder={'Titulli'} onBlur={(event) => titleChange(event)} className="form-control" id="category" />
                     </div>
                 <div className={'col-md-3'}>
                         <label>Kategoria:</label>
@@ -164,12 +164,14 @@ function Books(props: any) {
 
                     </div>
                 <div className={'col-md-2 buttons'}>
-                    <button onClick={() => filterBooks()} className={'btn btn-success'}>
-                        Filtro
-                    </button>
-                    <button onClick={() => clearBooks()} className={'btn btn-warning'}>
-                        Fshij
-                    </button>
+                    <div className={'row d-flex align-items-end w-100'}>
+                        <button onClick={() => filterBooks()} className={'btn btn-success col-md-6'}>
+                            Filtro
+                        </button>
+                        <button onClick={() => clearBooks()} className={'btn btn-warning col-md-6'}>
+                            Fshij
+                        </button>
+                    </div>
                 </div>
             </div>
             <div className="book-cards">
