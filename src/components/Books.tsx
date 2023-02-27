@@ -12,16 +12,19 @@ function Books(props: any) {
     const [category, setCategory] = useState<string>('');
     const [author, setAuthor] = useState<string>();
     // const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
-    const categories = [{name: 'Anglisht', value: 'a'},
-                {name: 'Botime A.R', value: 'ar'},
-                {name: 'Biografi', value: 'b'},
+    const categories = [
+        {name: 'Filozofi', value: 'f'},
+        {name: 'Psikologji', value: 'p'},
+        {name: 'Botime A.R', value: 'ar'},
+        {name: 'Mitologji', value: 'm'},
+        {name: 'Anglisht', value: 'a'},
+        {name: 'Biografi', value: 'b'},
         {name: 'Enciklopedi, Fjalor dhe Shkence', value: 'e.f'},
         {name: 'Histori', value: 'h'},
         {name: 'Konspiracion', value: 'k'},
         {name: 'Letersi e Juaj', value: 'l.h'},
         {name: 'Letersi Shqipetare', value: 'l.sh'},
-        {name: 'Psikologji', value: 'p'},
-        {name: 'Filozofi', value: 'f'},
+        {name: 'Religjion', value: 'r'},
         {name: 'Histori', value: 'h'}];
     const [authors, setAuthors] = useState<Author[]>([]);
     const [loader, setLoader] = useState<boolean>(true);
