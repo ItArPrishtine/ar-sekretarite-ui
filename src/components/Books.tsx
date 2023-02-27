@@ -11,7 +11,18 @@ function Books(props: any) {
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>('');
     const [author, setAuthor] = useState<string>();
-    const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
+    // const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
+    const categories = [{name: 'Anglisht', value: 'a'},
+                {name: 'Botime A.R', value: 'ar'},
+                {name: 'Biografi', value: 'b'},
+        {name: 'Enciklopedi, Fjalor dhe Shkence', value: 'e.f'},
+        {name: 'Histori', value: 'h'},
+        {name: 'Konspiracion', value: 'k'},
+        {name: 'Letersi e Juaj', value: 'l.h'},
+        {name: 'Letersi Shqipetare', value: 'l.sh'},
+        {name: 'Psikologji', value: 'p'},
+        {name: 'Filozofi', value: 'f'},
+        {name: 'Histori', value: 'h'}];
     const [authors, setAuthors] = useState<Author[]>([]);
     const [loader, setLoader] = useState<boolean>(true);
 
@@ -65,7 +76,7 @@ function Books(props: any) {
         } else if (cat.startsWith('l.sh')){
             return '/images/book_images/l.sh.png'
         } else if (cat.startsWith('p')){
-            return '/images/book_images/l.sh.png'
+            return '/images/book_images/p.png'
         } else {
             return '/images/book_images/f.png'
         }
@@ -129,7 +140,7 @@ function Books(props: any) {
                             {
                                 (categories || []).map((element) => {
                                     return (
-                                        <option value={element} key={element}>{element}</option>
+                                        <option value={element.value} key={element.value}>{element.name}</option>
                                     )
                                 })
                             }
@@ -150,10 +161,10 @@ function Books(props: any) {
 
                     </div>
                 <div className={'col-md-2 buttons'}>
-                    <button onClick={() => filterBooks()} className={'btn btn-primary'}>
+                    <button onClick={() => filterBooks()} className={'btn btn-success'}>
                         Filtro
                     </button>
-                    <button onClick={() => clearBooks()} className={'btn btn-primary'}>
+                    <button onClick={() => clearBooks()} className={'btn btn-warning'}>
                         Fshij
                     </button>
                 </div>

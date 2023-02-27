@@ -78,8 +78,16 @@
   }
 }
 .buttons {
+  display: flex;
+  justify-content: space-between;
+
   button {
+    width: 100%;
     margin: 0 10px;
+
+    &:last-of-type {
+      color: white;
+    }
   }
 }
 
