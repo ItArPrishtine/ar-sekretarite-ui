@@ -77,3 +77,14 @@
     padding-right: 10px;
   }
 }
+.buttons {
+  button {
+    margin: 0 10px;
+  }
+}
+
+.content-loaders {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

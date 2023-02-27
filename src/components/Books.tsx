@@ -1,16 +1,41 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import { Book } from './../shared/interfaces';
+import { Book, Author } from './../shared/interfaces';
+import ContentLoader from "react-content-loader";
 
 import './style.scss';
 
-function Books() {
+
+function Books(props: any) {
     const [bookList, setBookList] = useState<Book[]>([]);
+    const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
+    const [title, setTitle] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
+    const [author, setAuthor] = useState<Author>();
+    const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
+    const [authors, setAuthors] = useState<Author[]>([]);
+    const [loader, setLoader] = useState<boolean>(true);
+
+    function getAuthorsFromBooks(books: Book[]) {
+        const authors: Author[] = [];
+
+        books.forEach(function(book) {
+                if (!authors.map(author => author.id).includes(book.author.id)) {
+                    authors.push(book.author);
+                }
+            }
+        );
+
+        setAuthors(authors);
+    }
 
     async function getData() {
         axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&&_sort=id:ASC`)
             .then(res => {
                 setBookList(res.data);
+                setFilteredBooks(res.data);
+                getAuthorsFromBooks(res.data);
+                setLoader(false);
             })
     }
 
@@ -23,10 +48,10 @@ function Books() {
 
         if (cat.startsWith('f')){
             return '/images/book_images/f.png'
-        } else if (cat.startsWith('a')){
-            return '/images/book_images/a.png'
         } else if (cat.startsWith('ar')){
             return '/images/book_images/ar.png'
+        } else if (cat.startsWith('a')){
+            return '/images/book_images/a.png'
         } else if (cat.startsWith('b')){
             return '/images/book_images/b.png'
         } else if (cat.startsWith('e.f')){
@@ -46,46 +71,121 @@ function Books() {
         }
     }
 
+    function authorChange(event: any) {
+        setAuthor(event.target.value);
+    }
+
+    function categoryChange(event: any) {
+        setCategory(event.target.value);
+    }
+
+    function titleChange(event: any) {
+        setTitle(event.target.value);
+    }
+
+    function filterBooks() {
+        setLoader(true);
+
+        let filters = '';
+
+        if (category) {
+            filters+=`&category_contains=${category}`;
+        }
+
+        if (title) {
+            filters+=`&title_contains=${title}`;
+        }
+
+        axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&_sort=id:ASC${filters}`)
+            .then(res => {
+                setLoader(false);
+                setFilteredBooks(res.data);
+            })
+    }
+
+    function clearBooks() {
+        setLoader(true);
+        setFilteredBooks(bookList);
+        setCategory('');
+        setTitle('');
+
+        setTimeout(() => {
+            setLoader(false)
+        }, 1000)
+
+    }
+
     return (
         <div className='container'>
             <div className="filter-bar row">
                 <div className='col-md-4'>
                         <label>Titulli i Librit:</label>
-                        <input className="form-control" id="category" />
+                        <input onBlur={(event) => titleChange(event)} className="form-control" id="category" />
                     </div>
-                <div className={'col-md-4'}>
+                <div className={'col-md-3'}>
                         <label>Kategoria:</label>
-                        <select className="form-select" id="title">
-                            <option value="">All</option>
-                            <option value="the_catcher_in_the_rye">The Catcher in the Rye</option>
-                            <option value="to_kill_a_mockingbird">To Kill a Mockingbird</option>
-                            <option value="1984">1984</option>
-                            <option value="pride_and_prejudice">Pride and Prejudice</option>
-                            <option value="the_great_gatsby">The Great Gatsby</option>
+                        <select className="form-select" id="title" onChange={(event) => categoryChange(event)}>
+                            <option value={''}>Te gjitha</option>
+                            {
+                                (categories || []).map((element) => {
+                                    return (
+                                        <option value={element} key={element}>{element}</option>
+                                    )
+                                })
+                            }
                         </select>
                 </div>
                 <div className={'col-md-3'}>
                         <label>Emri i Autorit:</label>
-                        <select className="form-select" id="author">
-                            <option value="">All</option>
-                            <option value="j_d_salinger">J.D. Salinger</option>
-                            <option value="harper_lee">Harper Lee</option>
-                            <option value="george_orwell">George Orwell</option>
-                            <option value="jane_austen">Jane Austen</option>
-                            <option value="f_scott_fitzgerald">F. Scott Fitzgerald</option>
+                        <select className="form-select" id="author" onChange={(event) => authorChange(event)}>
+                            <option>Te gjithe</option>
+                            {
+                                (authors || []).map((element) => {
+                                    return (
+                                        <option value={element.id} key={element.id}>{element.name}</option>
+                                    )
+                                })
+                            }
                         </select>
 
                     </div>
-                <div className={'col-md-1'}>
-                    <button className={'btn btn-primary'}>
+                <div className={'col-md-2 buttons'}>
+                    <button onClick={() => filterBooks()} className={'btn btn-primary'}>
                         Filtro
+                    </button>
+                    <button onClick={() => clearBooks()} className={'btn btn-primary'}>
+                        Fshij
                     </button>
                 </div>
             </div>
             <div className="book-cards">
+                <div className={'content-loaders'}>
+                    {
+                        [1,2,3,4].map(item => {
+                            return ( loader &&
+                                <ContentLoader
+                                    key={item}
+                                    style={{ width: '310px' }}
+                                    height={400}
+                                    speed={2}
+                                    className={'content-loader'}
+                                    primaryColor="#f3f3f3"
+                                    secondaryColor="#ecebeb"
+                                    {...props}
+                                >
+                                    <rect x="0" y="0" width="310" height="280" />
+                                    <rect x="0" y="290" width="310" height="10" />
+                                    <rect x="0" y="310" width="150" height="10" />
+                                    <rect x="0" y="330" width="80" height="10" />
+                                </ContentLoader>
+                            )
+                        })
+                    }
+                </div>
+
                 {
-                    (bookList || []).map((element) => {
-                        return (
+                    (filteredBooks || []).map((element) => {
+                        return ( !loader &&
                             <div key={element.id} className="book-card" data-category="fiction" data-title="1984" data-author="george_orwell">
                                 {/*<img src="https://fastly.picsum.photos/id/59/800/600.jpg?hmac=L2eXAA8MFqqxnkN4w-YFltHcmSo-gqwKHlKBNwxq490" alt="Book 1" />*/}
 
