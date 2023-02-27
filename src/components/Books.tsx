@@ -5,19 +5,19 @@ import ContentLoader from "react-content-loader";
 
 import './style.scss';
 
-
 function Books(props: any) {
     const [bookList, setBookList] = useState<Book[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>('');
-    const [author, setAuthor] = useState<Author>();
+    const [author, setAuthor] = useState<string>();
     const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
     const [authors, setAuthors] = useState<Author[]>([]);
     const [loader, setLoader] = useState<boolean>(true);
 
     function getAuthorsFromBooks(books: Book[]) {
         const authors: Author[] = [];
+        console.log(author);
 
         books.forEach(function(book) {
                 if (!authors.map(author => author.id).includes(book.author.id)) {
@@ -71,15 +71,15 @@ function Books(props: any) {
         }
     }
 
-    function authorChange(event: any) {
+    function authorChange(event: React.ChangeEvent<HTMLSelectElement>) {
         setAuthor(event.target.value);
     }
 
-    function categoryChange(event: any) {
+    function categoryChange(event: React.ChangeEvent<HTMLSelectElement>) {
         setCategory(event.target.value);
     }
 
-    function titleChange(event: any) {
+    function titleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setTitle(event.target.value);
     }
 
