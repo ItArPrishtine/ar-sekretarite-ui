@@ -164,11 +164,11 @@ function Books(props: any) {
 
                     </div>
                 <div className={'col-md-2 buttons'}>
-                    <div className={'row d-flex align-items-end w-100'}>
-                        <button onClick={() => filterBooks()} className={'btn btn-success col-md-6'}>
+                    <div className={'buttons-plc'}>
+                        <button onClick={() => filterBooks()} className={'btn btn-success'}>
                             Filtro
                         </button>
-                        <button onClick={() => clearBooks()} className={'btn btn-warning col-md-6'}>
+                        <button onClick={() => clearBooks()} className={'btn btn-warning'}>
                             Fshij
                         </button>
                     </div>

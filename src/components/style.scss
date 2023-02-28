@@ -32,7 +32,7 @@
 }
 
 .book-card .image {
-  height: 280px;
+  height: 265px;
   background-repeat: no-repeat;
   background-size: contain;
   transition: all 0.3s ease;
@@ -78,16 +78,18 @@
   }
 }
 .buttons {
-  display: flex;
-  justify-content: space-between;
+  .buttons-plc {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
   button {
-    width: 60px;
+    width: 49%;
     text-align: center;
 
     &:last-of-type {
       color: white;
-      margin-left: 10px;
     }
   }
 }
@@ -101,19 +103,6 @@
 @media screen and (max-width: 1200px) {
   .filter-bar  {
     padding: 10px 0;
-
-    .buttons {
-      button {
-        width: 40px;
-        text-align: center;
-        font-size: 12px;
-        padding: 6px;
-      }
-
-      button:last-of-type {
-        margin-left: 5px;
-      }
-    }
   }
 
   .book-card {
@@ -150,7 +139,12 @@
   }
 
   .book-card .image {
-    height: 265px;
+    height: 175px;
+  }
+
+ .buttons-plc button {
+    font-size: 14px;
+    padding: 5px;
   }
 
   .book-card {
@@ -164,5 +158,24 @@
     .book-card p {
       font-size: 10px;
     }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .filter-bar {
+    div {
+      max-width: 50%;
+      margin-bottom: 10px;
+    }
+
+    .buttons .buttons-plc {
+      max-width: 100%;
+      margin-bottom: 0;
+    }
+  }
+
+  .row.d-flex.align-items-end.w-100 {
+    max-width: 100% !important;
+    justify-content: space-between;
   }
 }
