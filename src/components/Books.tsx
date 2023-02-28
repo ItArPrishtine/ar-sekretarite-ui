@@ -22,7 +22,7 @@ function Books(props: any) {
         {name: 'Enciklopedi, Fjalor dhe Shkence', value: 'e.f'},
         {name: 'Histori', value: 'h'},
         {name: 'Konspiracion', value: 'k'},
-        {name: 'Letersi e Juaj', value: 'l.h'},
+        {name: 'Letersi e Huaj', value: 'l.h'},
         {name: 'Letersi Shqipetare', value: 'l.sh'},
         {name: 'Religjion', value: 'r'},
         {name: 'Histori', value: 'h'}];
