@@ -20,6 +20,7 @@
   transition: all 0.3s ease;
   border: 1px solid #ffc800;
   width: 310px;
+  position: relative;
 
   .card-content {
     padding: 7px;
@@ -98,6 +99,66 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.inside {
+  z-index: 9;
+  background: #ffc107;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  border-radius: 0 0 30px 30px;
+  transition: all 0.3s, border-radius 2s, top 1s;
+  overflow: hidden;
+
+  .icon {
+    position: absolute;
+    right: 76px;
+    top: 87px;
+    color: white;
+    opacity: 1;
+
+    p {
+      transform: rotate(45deg);
+    }
+  }
+  &:hover {
+    width: 100%;
+    right: 0;
+    top: 0;
+    border-radius: 0;
+
+    .icon {
+      opacity: 0;
+      right: 15px;
+      top: 15px;
+    }
+    .contents {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .contents {
+    padding: 5%;
+    opacity: 0;
+    transform: scale(0.5);
+    transform: translateY(-200%);
+    transition: opacity 0.2s, transform 0.8s;
+    table {
+      text-align: left;
+      width: 100%;
+    }
+    h1,
+    p,
+    table {
+      color: white;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
 }
 
 @media screen and (max-width: 1200px) {

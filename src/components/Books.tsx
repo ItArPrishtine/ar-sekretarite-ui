@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import { Book, Author } from './../shared/interfaces';
+import { Book, Author } from '../shared/interfaces';
 import ContentLoader from "react-content-loader";
 
 import './style.scss';
@@ -11,7 +11,7 @@ function Books(props: any) {
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>('');
     const [author, setAuthor] = useState<string>();
-    // const categories = ['a', 'ar', 'b', 'e.f', 'h', 'k', 'l.h', 'l.sh', 'p', 'k'];
+
     const categories = [
         {name: 'Filozofi', value: 'f'},
         {name: 'Psikologji', value: 'p'},
@@ -26,6 +26,7 @@ function Books(props: any) {
         {name: 'Letersi Shqipetare', value: 'l.sh'},
         {name: 'Religjion', value: 'r'},
         {name: 'Histori', value: 'h'}];
+
     const [authors, setAuthors] = useState<Author[]>([]);
     const [loader, setLoader] = useState<boolean>(true);
 
@@ -129,6 +130,38 @@ function Books(props: any) {
 
     }
 
+    function getBorrowHtml(element: Book) {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        const borrowedBook = element.borrowed_books.find(dicka => dicka.returned == false)
+
+        return (
+            borrowedBook && <div className="inside">
+                <div className="icon">
+                    <p>Huazuar</p>
+                </div>
+                <div className="contents">
+                    <table>
+                        <tr>
+                            {/*<th>Huazuar nga:</th>*/}
+                            <th>Data e Huazimit: </th>
+                        </tr>
+                        <tr>
+                            {/*<td>Agon Haxhani</td>*/}
+                            <td>{ borrowedBook.borrowed_date}</td>
+                        </tr>
+                        <tr>
+                            <th>Data per tu Kthyer: </th>
+                        </tr>
+                        <tr>
+                            <td> {borrowedBook.date_to_return} </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className='container'>
             <div className="filter-bar row">
@@ -201,10 +234,11 @@ function Books(props: any) {
 
                 {
                     (filteredBooks || []).map((element) => {
-                        return ( !loader &&
+                        return !loader &&
                             <div key={element.id} className="book-card" data-category="fiction" data-title="1984" data-author="george_orwell">
-                                {/*<img src="https://fastly.picsum.photos/id/59/800/600.jpg?hmac=L2eXAA8MFqqxnkN4w-YFltHcmSo-gqwKHlKBNwxq490" alt="Book 1" />*/}
-
+                                {
+                                    getBorrowHtml(element)
+                                }
                                 <div className={'image'} style={{
                                     backgroundImage: `url("${getImageUrl(element.category)}")`
                                 }}>
@@ -216,7 +250,6 @@ function Books(props: any) {
                                     <p className="card-category">{element.category}</p>
                                 </div>
                             </div>
-                        )
                     })
                 }
             </div>
