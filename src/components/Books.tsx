@@ -131,8 +131,6 @@ function Books(props: any) {
     }
 
     function getBorrowHtml(element: Book) {
-        // eslint-disable-next-line no-debugger
-        debugger;
         const borrowedBook = element.borrowed_books.find(dicka => dicka.returned == false)
 
         return (
@@ -143,11 +141,9 @@ function Books(props: any) {
                 <div className="contents">
                     <table>
                         <tr>
-                            {/*<th>Huazuar nga:</th>*/}
                             <th>Data e Huazimit: </th>
                         </tr>
                         <tr>
-                            {/*<td>Agon Haxhani</td>*/}
                             <td>{ borrowedBook.borrowed_date}</td>
                         </tr>
                         <tr>
@@ -251,6 +247,10 @@ function Books(props: any) {
                                 </div>
                             </div>
                     })
+                }
+
+                {
+                    (filteredBooks && filteredBooks.length == 0 && !loader) && <p>Momentalisht ky Liber nuk gjendet tek biblioteka :)</p>
                 }
             </div>
         </div>
