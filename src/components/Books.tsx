@@ -111,6 +111,10 @@ function Books(props: any) {
             filters+=`&title_contains=${title}`;
         }
 
+        if (author) {
+            filters+=`&author.id=${author}`;
+        }
+
         axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&_sort=id:ASC${filters}`)
             .then(res => {
                 setLoader(false);
