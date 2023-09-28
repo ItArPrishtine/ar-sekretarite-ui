@@ -199,7 +199,7 @@ function Books(props: any) {
                 <div className={'col-md-2 buttons'}>
                     <div className={'buttons-plc'}>
                         <button onClick={() => filterBooks()} className={'btn btn-success'}>
-                            Filtro
+                            Kërko
                         </button>
                         <button onClick={() => clearBooks()} className={'btn btn-warning'}>
                             Fshij
