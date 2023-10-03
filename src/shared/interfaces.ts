@@ -3,6 +3,7 @@ export type Book = {
     title: string;
     category: string;
     author: Author;
+    author_data: Author; // only on search
     borrowed_books: BorrowedBooks[];
 }
 

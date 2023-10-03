@@ -41,6 +41,8 @@ function Books(props: any) {
             }
         );
 
+        authors.sort((a, b) => a.name > b.name ? 1 : -1);
+
         setAuthors(authors);
     }
 
@@ -104,18 +106,24 @@ function Books(props: any) {
         let filters = '';
 
         if (category) {
-            filters+=`&category_contains=${category}`;
+            filters+=`&category=${category}`;
         }
 
         if (title) {
-            filters+=`&title_contains=${title}`;
+            filters+=`&title=${title}`;
         }
 
         if (author) {
-            filters+=`&author.id=${author}`;
+            filters+=`&authorId=${author}`;
         }
 
-        axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&_sort=id:ASC${filters}`)
+        let httpUrl = 'https://ar-sekretarite.herokuapp.com/books?_limit=-1&_sort=id:ASC'
+
+        if (filters) {
+            httpUrl = `https://ar-sekretarite.herokuapp.com/books/custom/search?_limit=-1&_sort=id:ASC${filters}`;
+        }
+
+        axios.get(httpUrl)
             .then(res => {
                 setLoader(false);
                 setFilteredBooks(res.data);
@@ -127,6 +135,7 @@ function Books(props: any) {
         setFilteredBooks(bookList);
         setCategory('');
         setTitle('');
+        setAuthor('');
 
         setTimeout(() => {
             setLoader(false)
@@ -185,7 +194,7 @@ function Books(props: any) {
                 <div className={'col-md-3'}>
                         <label>Emri i Autorit:</label>
                         <select className="form-select" id="author" onChange={(event) => authorChange(event)}>
-                            <option>Te gjithe</option>
+                            <option value={''}>Te gjithe</option>
                             {
                                 (authors || []).map((element) => {
                                     return (
@@ -246,7 +255,7 @@ function Books(props: any) {
                                 </div>
                                 <div className="card-content">
                                     <h4 className="card-title">{element.title}</h4>
-                                    <p className="card-author">{element.author.name}</p>
+                                    <p className="card-author">{element.author_data ? element.author_data.name : element.author.name}</p>
                                     <p className="card-category">{element.category}</p>
                                 </div>
                             </div>
