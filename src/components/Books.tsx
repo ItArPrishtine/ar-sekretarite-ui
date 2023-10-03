@@ -131,15 +131,7 @@ function Books(props: any) {
     }
 
     function clearBooks() {
-        setLoader(true);
-        setFilteredBooks(bookList);
-        setCategory('');
-        setTitle('');
-        setAuthor('');
-
-        setTimeout(() => {
-            setLoader(false)
-        }, 1000)
+        window.location.reload();
 
     }
 
