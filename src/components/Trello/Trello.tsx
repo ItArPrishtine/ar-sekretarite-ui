@@ -6,7 +6,7 @@ function Trello() {
 
     return (
         <div className='container'>
-            <button onClick={() => setShowMainTrello(!showMainTrello)}>{showMainTrello ? 'Kliko per Trellon e Ndihmesit' : 'Kliko per Trellon e Keshillit'}</button>
+            <button className={'button-trello'} onClick={() => setShowMainTrello(!showMainTrello)}>{showMainTrello ? 'Kliko per Trellon e Ndihmesit' : 'Kliko per Trellon e Keshillit'}</button>
             {showMainTrello ?
                 <iframe src={'https://cheery-squirrel-89cc01.netlify.app/account/trello'}/>
                 :
