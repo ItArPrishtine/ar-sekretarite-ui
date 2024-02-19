@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import './style.scss';
-import {Book} from "../../shared/interfaces";
 
 function Trello() {
     const [showMainTrello, setShowMainTrello] = useState<boolean>(true);

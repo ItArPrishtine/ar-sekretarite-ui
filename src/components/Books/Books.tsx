@@ -6,7 +6,6 @@ import ContentLoader from "react-content-loader";
 import './style.scss';
 
 function Books(props: any) {
-    const [bookList, setBookList] = useState<Book[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>('');
@@ -49,7 +48,6 @@ function Books(props: any) {
     async function getData() {
         axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&&_sort=id:ASC`)
             .then(res => {
-                setBookList(res.data);
                 setFilteredBooks(res.data);
                 getAuthorsFromBooks(res.data);
                 setLoader(false);
