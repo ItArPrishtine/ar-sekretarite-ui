@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
-import { Book, Author } from '../shared/interfaces';
+import { Book, Author } from '../../shared/interfaces';
 import ContentLoader from "react-content-loader";
 
 import './style.scss';

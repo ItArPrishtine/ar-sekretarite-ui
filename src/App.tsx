@@ -5,7 +5,8 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
-import Books from "./components/Books";
+import Books from "./components/Books/Books";
+import Trello from "./components/Trello/Trello";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Books />} />
               <Route path="/books" element={<Books />} />
+              <Route path="/trello" element={<Trello />} />
             </Routes>
           </div>
         </BrowserRouter>
