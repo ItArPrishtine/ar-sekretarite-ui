@@ -46,7 +46,7 @@ function Books(props: any) {
     }
 
     async function getData() {
-        axios.get(`https://ar-sekretarite.herokuapp.com/books?_limit=-1&&_sort=id:ASC`)
+        axios.get(`https://arsekretarite.com/books.json`)
             .then(res => {
                 setFilteredBooks(res.data);
                 getAuthorsFromBooks(res.data);
